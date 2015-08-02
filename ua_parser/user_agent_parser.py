@@ -114,7 +114,7 @@ class OSParser(object):
         if match:
             if self.os_replacement:
                 if re.search(r'\$1', self.os_replacement):
-                    os = re.sub(r'\$1', match.group(1), self.os_replacement)
+                    os = re.sub(r'\$1', match.group(1), self.os_replacement).strip()
                 else:
                     os = self.os_replacement
             elif match.lastindex:
@@ -171,8 +171,7 @@ class DeviceParser(object):
             return group[index]
           return ''
           
-        _string = re.sub(r'\$(\d)', _repl, string)
-        _string = re.sub(r'^\s+|\s+$', '', _string)
+        _string = re.sub(r'\$(\d)', _repl, string).strip()
         if _string == '':
             return None
         return _string
